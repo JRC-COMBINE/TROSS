@@ -1,24 +1,4 @@
-#
-# Copyright 2018-2019 
-# Authors: Satya Swarup Samal, Jeyashree Krishnan
-#
-# TROSS is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Lesser General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-# 
-# TROSS is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Lesser General Public License for more details.
-# 
-# You should have received a copy of the GNU Lesser General Public License
-# along with TROSS.  If not, see <http://www.gnu.org/licenses/>.
-#
-# logtolp post-processor
-# Reads in the log file from ptcut and outputs .lp files
-#
-tolp <- function(path_p, model_name, p_list, ep){
+tolp <- function(path_p, model_name, p_list, ep, norder){
 
 	outdir = paste(path_p, "db/", sep = "")
 	mods <- numeric()
@@ -33,7 +13,7 @@ tolp <- function(path_p, model_name, p_list, ep){
 		
 		eps = toString(as.integer(ep))
 		data <- readLines(file.path(outdir, paste(mod, "/ep", eps, "-log.txt", sep = "")))
-
+	
 		# extract k-values, remove arbitrary strings
 		fname <- data[grepl("Grid point: ",data)]
 		fname <-gsub("Grid point: ", "", fname)
@@ -47,32 +27,13 @@ tolp <- function(path_p, model_name, p_list, ep){
 		x2 <- grep("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ end", data)
 		n = as.list(c(1: length(x1)))
 		p = lapply(n, function(y) return(c(x1[y],x2[y])))
+		r = list()
 
 		# create output list of lists
 		out <- lapply(p, function(x) return(data[x[1]:x[2]]))
-		x <- sub('.*_', '', temp)
 		param <- sub('_.*','', temp)[1]
-		x <- as.double(unlist(strsplit(x,",")))
-		mid = as.integer(length(x)/2)
-		y <- x/ x[mid]
-		y <- sub('.*e', '', y)
-		y <- sub('0', '', y)
-		y <- sub("+", "", y, fixed = TRUE)
-		y <- as.integer(y)
-		r = list()
-
-		for (ele in 1:length(y)){
-			if (y[[ele]] <0){
-				r <- c(r, y[[ele]])
-			}
-			else if ((y[[ele]]) >= 0){
-				y[[ele]] <- y[[ele]]-1
-				r <- c(r, y[[ele]])
-			}
-		}
-
+		r <- seq(-norder, norder, by=1)
 		r <- sub('e.*', '', r)
-	
 
 	# extract the solutions and write to lp files
 	for (j in 1:length(out)){

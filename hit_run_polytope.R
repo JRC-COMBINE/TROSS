@@ -1,23 +1,7 @@
-#
-# Copyright 2018-2019 
-# Authors: Satya Swarup Samal, Jeyashree Krishnan
-#
-# TROSS is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Lesser General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-# 
-# TROSS is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Lesser General Public License for more details.
-# 
-# You should have received a copy of the GNU Lesser General Public License
-# along with TROSS.  If not, see <http://www.gnu.org/licenses/>.
-#
-# Read .lp file for hit and run algorithm
-# Change the model specific details for num_var, num_parameter, init_values
-#
+#Read .lp file for hit and run algorithm
+#Change the model specific details for num_var, num_parameter, init_values
+
+
 computeDistances = function(path_p,num_var,ini_vals,p_list,ep,
                             model_name,lb_v,ub_v,
                             num_points,ncores,l_p,BB){

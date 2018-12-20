@@ -1,23 +1,3 @@
-#
-# Copyright 2018-2019 
-# Authors: Satya Swarup Samal, Jeyashree Krishnan
-#
-# TROSS is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Lesser General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-# 
-# TROSS is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Lesser General Public License for more details.
-# 
-# You should have received a copy of the GNU Lesser General Public License
-# along with TROSS.  If not, see <http://www.gnu.org/licenses/>.
-#
-# single parameter perturbations
-#
-
 perturbsinglep <- function(model_name, p_list, ep, norder, path_ptcut, path_p, order, ncores){
 
 	require("parallel")
@@ -42,6 +22,7 @@ perturbsinglep <- function(model_name, p_list, ep, norder, path_ptcut, path_p, o
 		system(paste('cp -r ', ptbdir, '/', model_name, "/ ", ptbdir, '/', mod, '/',sep = ""))
 		moddir <- c(moddir, mod)
 	}
+	
 
 	for (id in 1:length(p_list)){
 		pparam = p_list[id]
@@ -54,18 +35,15 @@ perturbsinglep <- function(model_name, p_list, ep, norder, path_ptcut, path_p, o
 		x = gsub(pparam, ' ', x)
 		x = gsub('=', ' ', x)
 		x = as.numeric(x)
-
+		
 		start = x / (ep**norder)
-		temp = floor(log10(start))
-		temp = temp + 2*norder + 1
-		end = paste("1e",toString(temp), sep = "")
+		end = x/ (ep** -norder)
 		sparams <- c(sparams, start)
 		eparams <- c(eparams, end)
-
 	}
 
 	mclapply(1:length(p_list), function(x){
-		system(paste('sage ', path_ptcut , ' ' ,  moddir[x]  ,' --ep ' , as.integer(ep),' --multiple-lpfiles' , order,'  --stl --grid', ' ', p_list[x], ':', sparams[x],':', eparams[x], ':*', ep,  sep = ""))
+		system(paste('sage ', path_ptcut , ' ' ,  moddir[x]  ,' --ep ' , as.integer(ep),' --multiple-lpfiles ' , order,'  --stl --grid', ' ', p_list[x], ':', sparams[x],':', eparams[x], ':*', ep,  sep = ""))
 	}, mc.cores = ncores)	  		
 
 	

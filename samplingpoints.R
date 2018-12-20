@@ -1,21 +1,3 @@
-#
-# Copyright 2018-2019 
-# Authors: Satya Swarup Samal, Jeyashree Krishnan
-#
-# TROSS is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Lesser General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-# 
-# TROSS is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Lesser General Public License for more details.
-# 
-# You should have received a copy of the GNU Lesser General Public License
-# along with TROSS.  If not, see <http://www.gnu.org/licenses/>.
-#
-
 samplePoints = function(file,n,num_var, BB, ini_vals, ep, lb_v, ub_v){
   res <- readLines(file)
   E = matrix(ncol = num_var)
