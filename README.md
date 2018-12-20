@@ -34,7 +34,9 @@ The extension of the software to handle simultaneous perturbations of multiple p
 |Value        |           |
 | ------------- |:-------------:| 
 |`tg_l`        |  The tropical sensitivity score for each parameter in p_list.|
-|`tg_l_all`        |  The minimum Euclidean distance of tropical minimal branches corresponding to parameter <img src="https://latex.codecogs.com/gif.latex?\text{ }k_j\text{ }" /> perturbed by <img src="https://latex.codecogs.com/gif.latex?\text{ }\gamma_i\text{ }" /> from each of the nominal (unperturbed) tropical minimal branches.|
+
+The parameters `ub_v` and `lb_v` should be adjusted in order to avoid infeasible bounds.
+The perturbed output folders along with the tropical solutions will be found in `db/` folder. The default parameter values will be perturbed by the specified order of magnitude depending on epsilon. For example, for perturbation of parameter `k19` that takes the default value `4.875e-05`, `norder =3` and `ep = 5`, the program will generate seven directories: `k19_gamma_-3_modelname`, `k19_gamma_-2_modelname`, `k19_gamma_-1_modelname`, `k19_gamma_0_modelname`, `k19_gamma_1_modelname`, `k19_gamma_2_modelname` and `k19_gamma_3_modelname` respectively. The corresponding perturbed parameters, `k19` will take the values: `3.9e-07`, `1.95e-06`, `9.75e-06`, `4.875e-05`, `0.00024375`, `0.00121875` and `0.00609375` respectively.
 
 **Examples**
 ```source("run.R")
