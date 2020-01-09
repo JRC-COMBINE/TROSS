@@ -42,7 +42,7 @@ The perturbed output folders along with the tropical solutions will be found in 
 ```source("run.R")
 result = computeTROSS(
               model_name = "tgf_tif_10_h3_00557", 
-              path_ptcut = "/home/jk075370/tropinet/tropchapter/ptcut-v2-3-0/ptcut.py",
+              path_ptcut = "../ptcut-v2-3-0/ptcut.py",
               p_list =  c('k1'),
               path_p = paste(getwd(), "/", sep=""),
               num_var = 21,
