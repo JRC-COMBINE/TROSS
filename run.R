@@ -24,7 +24,7 @@ computeTROSS <- function(model_name, path_ptcut, p_list, path_p, num_var, num_pa
 
 result = computeTROSS(
               model_name = "tgf_tif_10_h3_00557", 
-              path_ptcut = "../ptcut-v3-0-2/ptcut.py", #"/home/jk075370/tropchapter/ptcut-v3-0-2/ptcut.py",
+              path_ptcut = "../ptcut-v3-0-2/ptcut.py", 
               #p_list =  paste("k",seq(1,41), sep = ""),
               p_list = "k19",
               path_p = paste(getwd(), "/", sep=""),
